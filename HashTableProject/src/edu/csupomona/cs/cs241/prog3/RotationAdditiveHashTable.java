@@ -4,8 +4,10 @@ public class RotationAdditiveHashTable<K,V> implements HashTable<K, V> {
     
     private Node<V> array[];
     
+    @SuppressWarnings("unchecked")
     public RotationAdditiveHashTable(int size) {
-        array = new Node<V>[size];
+        Object arr = new Object[size];
+        array = (Node<V>[]) arr;
     }
     
     @Override
@@ -32,4 +34,8 @@ public class RotationAdditiveHashTable<K,V> implements HashTable<K, V> {
         
     }
 
+    private int hash(K key){
+        return 0;
+        
+    }
 }

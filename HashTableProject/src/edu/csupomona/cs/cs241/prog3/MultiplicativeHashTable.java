@@ -4,8 +4,10 @@ public class MultiplicativeHashTable<K,V> implements HashTable<K, V> {
 
     private Node<V> array[];
     
+    @SuppressWarnings("unchecked")
     public MultiplicativeHashTable(int size) {
-        array = new (Node<V>[]) Object[size];
+        Object arr = new Object[size];
+        array = (Node<V>[]) arr;
     }
     
     @Override
@@ -32,4 +34,8 @@ public class MultiplicativeHashTable<K,V> implements HashTable<K, V> {
         
     }
 
+    private int hash(K key){
+        return 0;
+        
+    }
 }

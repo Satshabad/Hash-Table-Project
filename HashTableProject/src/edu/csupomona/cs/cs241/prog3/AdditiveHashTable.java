@@ -2,10 +2,12 @@ package edu.csupomona.cs.cs241.prog3;
 
 public class AdditiveHashTable<K,V> implements HashTable<K, V>{
 
-    private Node array[];
+    private Node<V> array[];
     
+    @SuppressWarnings("unchecked")
     public AdditiveHashTable(int size) {
-        array = new Node[size];
+        Object arr = new Object[size];
+        array = (Node<V>[]) arr;
     }
     
     @Override
@@ -32,4 +34,8 @@ public class AdditiveHashTable<K,V> implements HashTable<K, V>{
         
     }
 
+    private int hash(K key){
+        return 0;
+        
+    }
 }
