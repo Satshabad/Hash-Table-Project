@@ -6,15 +6,19 @@ public class TestDriver {
         
         KeyValueGenerator kv = new KeyValueGenerator();
         kv.initialize();
-        System.err.println(kv.getNextValue());
+        AdditiveHashTable<String, Integer> ah = new AdditiveHashTable<String, Integer>(100);
         
+
+        String st;
+        int n;
+        for(int i = 0; i < 443; i++){
+            st = kv.getNextKey();
+            n = kv.getNextValue();
+            System.err.println(st + " " + n);
+            ah.add(st, n);
+        }
         
-//        char c = 'z';
-//        c = (char) (((c + 1) % 123));
-//            if (c == 0){
-//                c = 97;
-//            }
-//        System.err.println(c);
+        ah.printReport();
         
     }
     

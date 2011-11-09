@@ -1,6 +1,12 @@
 package edu.csupomona.cs.cs241.prog3;
 
-import java.util.*;
+import java.util.Random;
+/**
+ * This class created pairs of integers and strings in a particular way.
+ * 
+ * @author Satshabad
+ *
+ */
 public class KeyValueGenerator {
 
     /**
@@ -42,7 +48,8 @@ public class KeyValueGenerator {
      */
     public String getNextKey(){
 
-        return nextKey(key, 7);
+        key = nextKey(key, 7);
+        return key;
     
     }
     

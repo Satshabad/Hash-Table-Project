@@ -2,12 +2,13 @@ package edu.csupomona.cs.cs241.prog3;
 
 public class RotationAdditiveHashTable<K,V> implements HashTable<K, V> {
     
-    private Node<V> array[];
+    private Node array[];
+    private int size;
     
     @SuppressWarnings("unchecked")
     public RotationAdditiveHashTable(int size) {
-        Object arr = new Object[size];
-        array = (Node<V>[]) arr;
+        this.size = size;
+        array = new Node[size];
     }
     
     @Override

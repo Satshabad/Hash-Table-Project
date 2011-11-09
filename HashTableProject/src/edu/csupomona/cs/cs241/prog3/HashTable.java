@@ -16,8 +16,8 @@ public interface HashTable<K, V> {
      * 
      * @pre true
      * @post the table has a mapping for the key to the value 
-     * @param key
-     * @param value
+     * @param key the key to the value 
+     * @param value the value to be added
      */
     public void add(K key, V value);
 
