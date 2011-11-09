@@ -6,7 +6,8 @@ public class TestDriver {
         
         KeyValueGenerator kv = new KeyValueGenerator();
         kv.initialize();
-        AdditiveHashTable<String, Integer> ah = new AdditiveHashTable<String, Integer>(100);
+        HashFunction hs = new HashFunction(1);
+        StringIntHashTable<String, Integer> ah = new StringIntHashTable<String, Integer>(100, hs);
         
 
         String st;

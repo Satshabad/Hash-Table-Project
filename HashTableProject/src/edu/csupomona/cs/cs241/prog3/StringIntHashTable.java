@@ -1,15 +1,17 @@
 package edu.csupomona.cs.cs241.prog3;
 
-import java.math.*;
-public class AdditiveHashTable<K extends String,V extends Integer> implements HashTable<K, V>{
+
+public class StringIntHashTable<K extends String,V extends Integer> implements HashTable<K, V>{
 
     private Node array[];
     private int size;
+    private HashFunction function;
     
     @SuppressWarnings("unchecked")
-    public AdditiveHashTable(int size) {
+    public StringIntHashTable(int size, HashFunction hf) {
         this.size = size;
         array = new Node[size];
+        function = hf;
     }
     
     
@@ -29,7 +31,7 @@ public class AdditiveHashTable<K extends String,V extends Integer> implements Ha
         Node n = new Node(value, null, key);
         
         // find the hash value of that key
-        int hashValue = hash(key);
+        int hashValue = function.hash(key, size);
         System.err.println(hashValue);
         // check for collision, chain if there is, otherwise add.
         if (array[hashValue] != null){
@@ -58,7 +60,7 @@ public class AdditiveHashTable<K extends String,V extends Integer> implements Ha
     public V remove(K key) {
         
         // finds out where value should be
-        int hashValue = hash(key);
+        int hashValue = function.hash(key, size);
         // if the value is chained
 
         if (array[hashValue] == null){
@@ -119,7 +121,7 @@ public class AdditiveHashTable<K extends String,V extends Integer> implements Ha
     @Override
     public V lookup(K key) {
      // finds out where value should be
-        int hashValue = hash(key);
+        int hashValue = function.hash(key, size);
         
         if (array[hashValue] == null){
             System.err.println("not a valid mapping");
@@ -206,15 +208,4 @@ public class AdditiveHashTable<K extends String,V extends Integer> implements Ha
         
     }
 
-    
-    public int hash(K key){
-        double value = 0;
-        
-        for(int i = 0; i < key.length(); i++){
-            int temp = (int) ((key.charAt(key.length()- 1 - i) - 96) * Math.pow(26, i));
-            value += temp;
-        }
-        return (int) (value % size);
-        
-    }
 }
