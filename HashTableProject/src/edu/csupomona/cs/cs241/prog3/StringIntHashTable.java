@@ -32,7 +32,7 @@ public class StringIntHashTable<K extends String,V extends Integer> implements H
         
         // find the hash value of that key
         int hashValue = function.hash(key, size);
-        System.err.println(hashValue);
+        //System.err.println(hashValue);
         // check for collision, chain if there is, otherwise add.
         if (array[hashValue] != null){
             
@@ -157,12 +157,7 @@ public class StringIntHashTable<K extends String,V extends Integer> implements H
 
     @Override
     public void printReport() {
-        int longestChain;
-        double averageChain;
-        double loadFactor = 0;
-        double densityFactor = 0;
         int reportArray[] = new int[size];
-        
         for (int i = 0; i < size; i++){
             
             if (array[i]==null){
@@ -182,30 +177,62 @@ public class StringIntHashTable<K extends String,V extends Integer> implements H
         for (int i = 0; i < reportArray.length; i++) {
             System.err.println(reportArray[i]);
         }
-        longestChain = reportArray[0];
-        averageChain = 0;
-        int numOfChains = 0;
-        for (int i = 0; i < size; i++){
-            
-            if(reportArray[i] > 1){
-                if (reportArray[i] > longestChain) {
-                    longestChain = reportArray[i];
-                }
-                averageChain += reportArray[i];
-                numOfChains++;
-            }
-            
-            if (reportArray[i] > 0) {
-                loadFactor++;
-                densityFactor += reportArray[i];
-            } 
-        }
-        System.out.println("Longest Chain: " + longestChain);
-        System.out.println("AverageChain: " + averageChain/numOfChains);
-        System.out.println("Load Factor: " + loadFactor/size);
-        System.out.println("Density Factor: " + densityFactor/size);
+        
+        System.out.println("Longest Chain: " + getLongestChain(reportArray));
+        System.out.println("AverageChain: " + getAverageChain(reportArray));
+        System.out.println("Load Factor: " + getLoadFactor(reportArray));
+        System.out.println("Density Factor: " + getDensityFactor(reportArray));
         
         
     }
+    
+    public int getLongestChain(final int[] reportArray){
+        int longestChain;
+        
+        longestChain = reportArray[0];
+        for (int i = 0; i < size; i++){
+            if (reportArray[i] > longestChain) {
+                longestChain = reportArray[i];
+            }
+        }
+        return longestChain;
+    }
 
+    public double getAverageChain(final int[] reportArray){
+        double averageChain = 0;
+        int numOfChains = 0;
+        
+        for (int i = 0; i < size; i++){
+            
+            if(reportArray[i] > 0){
+                averageChain += reportArray[i];
+                numOfChains++;
+            }   
+        }
+        return averageChain/numOfChains;
+        
+    }
+
+    public double getLoadFactor(final int[] reportArray){
+        double loadFactor = 0;
+        
+        for (int i = 0; i < size; i++){
+            
+            if (reportArray[i] > 0) {
+                loadFactor++;
+            } 
+        }
+        return loadFactor/size;
+    }
+
+    public double getDensityFactor(final int[] reportArray){
+        double densityFactor = 0;
+        
+        for (int i = 0; i < size; i++){
+            if (reportArray[i] > 0) {
+                densityFactor += reportArray[i];
+            } 
+        }
+        return densityFactor/size;
+    }
 }
